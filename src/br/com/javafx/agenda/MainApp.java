@@ -2,9 +2,9 @@ package br.com.javafx.agenda;
 
 import java.io.IOException;
 
+import br.com.javafx.agenda.controller.PessoaEditViewController;
+import br.com.javafx.agenda.controller.PessoaOverviewViewController;
 import br.com.javafx.agenda.model.Pessoa;
-import br.com.javafx.agenda.view.PessoaEditViewController;
-import br.com.javafx.agenda.view.PessoaOverviewViewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
