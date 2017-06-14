@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="background" stylesheets="@css/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.javafx.agenda.controller.PessoaEditViewController">
+<AnchorPane prefHeight="470.0" prefWidth="690.0" styleClass="background" stylesheets="@css/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.javafx.agenda.controller.PessoaEditViewController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="394.0" prefWidth="620.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="470.0" prefWidth="620.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button layoutX="181.0" layoutY="347.0" mnemonicParsing="false" onAction="#clickOk" prefHeight="25.0" prefWidth="129.0" stylesheets="@css/DarkTheme.css" text="Ok" textFill="WHITE" />
             <Button layoutX="316.0" layoutY="347.0" mnemonicParsing="false" onAction="#clickCancelar" prefHeight="25.0" prefWidth="129.0" stylesheets="@css/DarkTheme.css" text="Cancelar" textFill="WHITE" />

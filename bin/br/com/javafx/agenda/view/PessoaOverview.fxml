@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="435.0" prefWidth="686.0" stylesheets="@css/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.javafx.agenda.controller.PessoaOverviewViewController">
+<AnchorPane prefHeight="440.0" prefWidth="690.0" stylesheets="@css/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.javafx.agenda.controller.PessoaOverviewViewController">
    <children>
       <SplitPane dividerPositions="0.44398340248962653" layoutY="-135.0" prefHeight="295.0" prefWidth="458.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
