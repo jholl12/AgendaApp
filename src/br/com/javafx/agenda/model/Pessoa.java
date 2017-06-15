@@ -50,7 +50,7 @@ public class Pessoa {
 		this.sobrenome = new SimpleStringProperty(sobrenome);
 		this.email = new SimpleStringProperty(email);
 		this.cpf = new SimpleStringProperty(cpf);
-		this.dataAniversário = new SimpleObjectProperty<LocalDate>(LocalDate.parse("1998-09-09"));
+		this.dataAniversário = new SimpleObjectProperty<LocalDate>(LocalDate.parse(data));
        
 		this.endereco = new Endereco(rua, bairro, cidade, cep, numero);
 	}

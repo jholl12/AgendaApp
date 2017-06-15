@@ -39,7 +39,7 @@ public class PessoaDAO {
 				Pessoa pessoa = new Pessoa(
 				result.getString("nome"),
 				result.getString("sobrenome"),
-				result.getString("dataAniversario"),
+				result.getString("dataAniversario").substring(0, 10),
 				result.getString("email"),
 				result.getString("cpf"),
 				result.getString("rua"), 
