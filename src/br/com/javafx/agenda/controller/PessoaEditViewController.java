@@ -72,7 +72,7 @@ public class PessoaEditViewController {
 	    	sobrenomeInput.setText(pessoa.getSobrenome());
 	    	dataAniversarioInput.setText(DataUtil.formatToString(pessoa.getDataAniversario())); // Converte para String
 	    	emailInput.setText(pessoa.getEmail());
-	    	cpfInput.setText(Integer.toString(pessoa.getCpf())); // Converte para Integer
+	    	cpfInput.setText(pessoa.getCpf()); 
 	    	
 	    	ruaInput.setText(pessoa.getEndereco().getRua());
 	    	bairroInput.setText(pessoa.getEndereco().getBairro());
@@ -117,7 +117,7 @@ public class PessoaEditViewController {
     		pessoa.setSobreNome(sobrenomeInput.getText());
     		pessoa.setDataAniversário(DataUtil.formatToLocalDate(dataAniversarioInput.getText())); 
     		pessoa.setEmail(emailInput.getText());
-    		pessoa.setCpf(Integer.parseInt(cpfInput.getText()));
+    		pessoa.setCpf(cpfInput.getText());
     		
     		Endereco endereco = pessoa.getEndereco();
     		endereco.setRua(ruaInput.getText());

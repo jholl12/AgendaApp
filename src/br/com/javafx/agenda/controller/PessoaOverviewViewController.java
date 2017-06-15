@@ -121,7 +121,7 @@ public class PessoaOverviewViewController {
 			sobrenome.setText(pessoa.getSobrenome());
 			dataAniversario.setText(DataUtil.formatToString(pessoa.getDataAniversario())); // Converte para String
 			email.setText(pessoa.getEmail());
-			cpf.setText(Integer.toString(pessoa.getCpf()));
+			cpf.setText(pessoa.getCpf());
 			rua.setText(pessoa.getEndereco().getRua());
 			bairro.setText(pessoa.getEndereco().getBairro());
 			cidade.setText(pessoa.getEndereco().getCidade());

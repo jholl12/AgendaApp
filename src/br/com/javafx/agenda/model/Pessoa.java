@@ -21,7 +21,7 @@ public class Pessoa {
 	private StringProperty sobrenome;
 	private ObjectProperty<LocalDate> dataAniversário;
 	private StringProperty email;
-	private IntegerProperty cpf;
+	private StringProperty cpf;
 	private Endereco endereco;
 		
 	/**
@@ -30,7 +30,7 @@ public class Pessoa {
 	 * @author Jhonata Santos
 	 */
 	public Pessoa() {
-		this(null, null, null, 0, null, null, null, 0, 0);
+		this(null, null, null, null, null, null, null, "", 0, 0);
 	}
 	
 	/**
@@ -45,12 +45,12 @@ public class Pessoa {
 	 * @param numero
 	 * @author Jhonata Santos
 	 */
-	public Pessoa(String nome, String sobrenome, String email, int cpf, String rua, String bairro, String cidade, int cep, int numero) {
+	public Pessoa(String nome, String sobrenome, String data, String email, String cpf, String rua, String bairro, String cidade, int cep, int numero) {
 		this.nome = new SimpleStringProperty(nome);
 		this.sobrenome = new SimpleStringProperty(sobrenome);
 		this.email = new SimpleStringProperty(email);
-		this.cpf = new SimpleIntegerProperty(cpf);
-		this.dataAniversário = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+		this.cpf = new SimpleStringProperty(cpf);
+		this.dataAniversário = new SimpleObjectProperty<LocalDate>(LocalDate.parse("1998-09-09"));
        
 		this.endereco = new Endereco(rua, bairro, cidade, cep, numero);
 	}
@@ -108,7 +108,7 @@ public class Pessoa {
 	 * @return um cpf como int
 	 * @author Jhonata Santos
 	 */
-	public int getCpf() {
+	public String getCpf() {
 		return cpf.get();
 	}
 	
@@ -174,7 +174,7 @@ public class Pessoa {
 	 * @return o cpf da pessoa como StringProperty
 	 * @author Jhonata Santos
 	 */
-	public IntegerProperty cpfProperty() {
+	public StringProperty cpfProperty() {
 		return cpf;
 	}
 	
@@ -230,7 +230,7 @@ public class Pessoa {
 	 * @param cpf
 	 * @author Jhonata Santos
 	 */
-	public void setCpf(Integer cpf) {
+	public void setCpf(String cpf) {
 		this.cpf.set(cpf);
 	}
 }

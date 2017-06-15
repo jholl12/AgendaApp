@@ -25,7 +25,7 @@ public class Endereco {
 	 * @author Jhonata Santos
 	 */
 	public Endereco() {
-
+		this(null, null, null,0, 0);
 	}
 	
 	/**

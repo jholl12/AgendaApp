@@ -1,8 +1,13 @@
 package br.com.javafx.agenda.utils;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Funções auxiliares para lidar com datas.
@@ -41,7 +46,7 @@ public class DataUtil {
 		if(date == null) {
 			return null;
 		}
-		
+				
 		DateTimeFormatter formata = DateTimeFormatter.ofPattern(DATE);
 		LocalDate data = formata.parse(date, LocalDate::from);
 		return data;

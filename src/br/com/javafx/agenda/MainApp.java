@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import br.com.javafx.agenda.controller.PessoaEditViewController;
 import br.com.javafx.agenda.controller.PessoaOverviewViewController;
+import br.com.javafx.agenda.dao.PessoaDAO;
 import br.com.javafx.agenda.model.Pessoa;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -15,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.converter.PercentageStringConverter;
 
 /**
  *  
@@ -30,15 +32,7 @@ public class MainApp extends Application {
 	private ObservableList<Pessoa> pessoas = FXCollections.observableArrayList();
 
     public MainApp() {
-    	pessoas.add(new Pessoa("Hans", "Muster", "hans@hans.com", 123123123, "Rua AAA", "Bairro AAA", "Cidade AAA", 123123123, 123));
-    	pessoas.add(new Pessoa("Ruth", "Mueller", "Ruth@Ruth.com", 567567567, "Rua BBB", "Bairro BBB", "Cidade BBB", 321321321, 321));
-    	pessoas.add(new Pessoa("Heinz", "Kurz", "Heinz@Heinz.com", 3523453, "Rua CCC", "Bairro CCC", "Cidade CCC", 456456456, 456));
-    	pessoas.add(new Pessoa("Cornelia", "Meier", "Cornelia@Cornelia.com", 7654745, "Rua DDD", "Bairro DDD", "Cidade DDD", 654654654, 654));
-    	pessoas.add(new Pessoa("Werner", "Meyer", "Werner@Werner.com", 564647563, "Rua EEE", "Bairro EEE", "Cidade EEE", 789789789, 789));
-    	pessoas.add(new Pessoa("Lydia", "Kunz", "Lydia@Lydia.com", 932902384, "Rua FFF", "Bairro FFF", "Cidade FFF", 987987987, 987));
-    	pessoas.add(new Pessoa("Anna", "Best", "Anna@Anna.com", 48753842, "Rua GGG", "Bairro GGG", "Cidade GGG", 98098098, 98));
-    	pessoas.add(new Pessoa("Stefan", "Meier", "Stefan@Stefan.com", 956840583, "Rua HHH", "Bairro HHH", "Cidade HHH", 31453546, 23));
-    	pessoas.add(new Pessoa("Martin", "Mueller", "Martin@Martin.com", 345232245, "Rua III", "Bairro III", "Cidade III", 354758, 23567));
+    	pessoas.addAll(new PessoaDAO().listarPessoas());
     }
 
     //  Retorna os dados como uma observable list de Pessoa. 
