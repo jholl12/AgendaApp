@@ -16,39 +16,31 @@ import javafx.collections.ObservableList;
  * @version 1.0
  */
 public class PessoaDAO {
-	
+
 	/**
-	 * Lista todos as pessoas existentes no banco de dados referente a tabela
-	 * de pessoas e enderecos
+	 * Lista todos as pessoas existentes no banco de dados referente a tabela de
+	 * pessoas e enderecos
 	 * 
 	 * @return todos os produtos do banco
 	 * @author Jhonata Santos
 	 */
 	public ObservableList<Pessoa> listarPessoas() {
 		ObservableList<Pessoa> pessoas = FXCollections.observableArrayList();
-		Connection conn = new  ConnectionFactory().getConnection();
-		String query = "SELECT pessoas.*, enderecos.* FROM agendaapp.pessoas " +
-					   "INNER JOIN enderecos ON pessoas.id_endereco = enderecos.id";
+		Connection conn = new ConnectionFactory().getConnection();
+		String query = "SELECT pessoas.*, enderecos.* FROM agendaapp.pessoas "
+				+ "INNER JOIN enderecos ON pessoas.id_endereco = enderecos.id";
 		PreparedStatement ps;
-		
+
 		try {
 			ps = conn.prepareStatement(query);
 			ResultSet result = ps.executeQuery();
 
 			while (result.next()) {
-				Pessoa pessoa = new Pessoa(
-				result.getString("nome"),
-				result.getString("sobrenome"),
-				result.getString("dataAniversario").substring(0, 10),
-				result.getString("email"),
-				result.getString("cpf"),
-				result.getString("rua"), 
-				result.getString("bairro"), 
-				result.getString("cidade"), 
-				result.getInt("cep"), 
-				result.getInt("numero")
-				);
-				
+				Pessoa pessoa = new Pessoa(result.getString("nome"), result.getString("sobrenome"),
+						result.getString("dataAniversario").substring(0, 10), result.getString("email"),
+						result.getString("cpf"), result.getString("rua"), result.getString("bairro"),
+						result.getString("cidade"), result.getInt("cep"), result.getInt("numero"));
+
 				pessoas.add(pessoa);
 			}
 			result.close();
@@ -67,24 +59,40 @@ public class PessoaDAO {
 	 * @author Jhonata Santos
 	 */
 	public void adicionarPessoa() {
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * 
 	 * @author Jhonata Santos
 	 */
 	public void editarPessoa() {
-		
+
 	}
-	
+
 	/**
-	 * 
+	 * Realiza a exclusão de uma pessoa do banco de dados da tabela de Pessoa e
+	 * sua referencia a tabela Endereco
 	 * 
 	 * @author Jhonata Santos
 	 */
-	public void excluirPessoa() {
-		
+	public boolean excluirPessoa(Pessoa pessoa) {
+		Connection conn = new ConnectionFactory().getConnection();
+		String query = "DELETE pessoas.*, enderecos.* FROM agendaapp.pessoas "
+				+ "INNER JOIN agendaapp.enderecos ON agendaapp.pessoas.id_endereco = agendaapp.enderecos.id "
+				+ "WHERE pessoas.cpf = " + "'" + pessoa.getCpf() + "'";
+		PreparedStatement ps;
+
+		try {
+			ps = conn.prepareStatement(query);
+			ps.executeUpdate();
+
+			ps.close();
+			conn.close();
+			return true;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

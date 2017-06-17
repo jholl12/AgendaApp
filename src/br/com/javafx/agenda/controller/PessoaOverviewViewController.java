@@ -1,13 +1,14 @@
 package br.com.javafx.agenda.controller;
 
 import br.com.javafx.agenda.MainApp;
+import br.com.javafx.agenda.dao.PessoaDAO;
 import br.com.javafx.agenda.model.Pessoa;
+import br.com.javafx.agenda.utils.AlertaUtil;
 import br.com.javafx.agenda.utils.DataUtil;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -65,26 +66,24 @@ public class PessoaOverviewViewController {
 		nomeColuna.setCellValueFactory(
 				// Classe anônima
 				new Callback<CellDataFeatures<Pessoa, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Pessoa, String> cellData) {
-				return cellData.getValue().nomeProperty();
-			}
-		});
-		
-		sobrenomeColuna.setCellValueFactory(
-				new Callback<CellDataFeatures<Pessoa, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Pessoa, String> cellData) {
+						return cellData.getValue().nomeProperty();
+					}
+				});
+
+		sobrenomeColuna.setCellValueFactory(new Callback<CellDataFeatures<Pessoa, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<Pessoa, String> cellData) {
 				return cellData.getValue().sobrenomeProperty();
 			}
 		});
-		
+
 		// Limpa os detalhes da pessoa
 		mostrarDetalhesPessoa(null);
-		
+
 		// Detecta mudança de seleção e mostra os detalhes da pessoa quando houver mudança
-		pessoaTabela.getSelectionModel().selectedItemProperty().addListener(
-				new ChangeListener<Pessoa>() {
+		pessoaTabela.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Pessoa>() {
 			@Override
 			public void changed(ObservableValue<? extends Pessoa> observable, Pessoa oldValue, Pessoa newValue) {
 				mostrarDetalhesPessoa(newValue);
@@ -93,40 +92,42 @@ public class PessoaOverviewViewController {
 	}
 
 	/**
-     * É chamado pela aplicação principal para dar uma referência de volta a si mesmo.
-     * 
-     * @param mainApp
-     * @author Jhonata Santos
-     */
+	 * É chamado pela aplicação principal para dar uma referência de volta a si
+	 * mesmo.
+	 * 
+	 * @param mainApp
+	 * @author Jhonata Santos
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
-		
-        // Adiciona os dados da observable list na tabela
+
+		// Adiciona os dados da observable list na tabela
 		pessoaTabela.setItems(mainApp.getPessoaData());
 	}
-	
+
 	// AÇÕES
-	
+
 	/**
 	 * Método responsável por mostrar todos os detalhes de uma pessoa
 	 * 
-	 * @param pessoa Recebe um objeto do tipo pessoa
+	 * @param pessoa
+	 *            Recebe um objeto do tipo pessoa
 	 * @author Jhonata Santos
 	 */
 	private void mostrarDetalhesPessoa(Pessoa pessoa) {
 		// Verifica se o objeto recebido é nulo
-		if(pessoa != null) {
+		if (pessoa != null) {
 			// Preenche as labels com as informações do objeto pessoa
 			nome.setText(pessoa.getNome());
 			sobrenome.setText(pessoa.getSobrenome());
-			dataAniversario.setText(DataUtil.formatToString(pessoa.getDataAniversario())); // Converte para String
+			dataAniversario.setText(DataUtil.formatToString(pessoa.getDataAniversario()));
 			email.setText(pessoa.getEmail());
 			cpf.setText(pessoa.getCpf());
 			rua.setText(pessoa.getEndereco().getRua());
 			bairro.setText(pessoa.getEndereco().getBairro());
 			cidade.setText(pessoa.getEndereco().getCidade());
-			cep.setText(Integer.toString(pessoa.getEndereco().getCep())); // Converte para String
-			numero.setText(Integer.toString(pessoa.getEndereco().getNumero())); // Converte para String
+			cep.setText(Integer.toString(pessoa.getEndereco().getCep()));
+			numero.setText(Integer.toString(pessoa.getEndereco().getNumero())); 
 		} else {
 			// Se a pessoa for null, remove todos os textos
 			nome.setText("");
@@ -152,21 +153,22 @@ public class PessoaOverviewViewController {
 	private void deletarPessoa() {
 		// Obtem o indice da pessoa selecionada
 		int pessoaSelecionada = pessoaTabela.getSelectionModel().getSelectedIndex();
-		
+
 		// Verifica a pessoa selecionada
-		if(pessoaSelecionada >= 0) {
-			pessoaTabela.getItems().remove(pessoaSelecionada);
+		if (pessoaSelecionada >= 0) {
+			Pessoa pessoa = pessoaTabela.getItems().get(pessoaSelecionada);
+			ButtonType resultado = AlertaUtil.alertaConfirmationExclusao();
+
+			// Verifica o botão clicado no Pop UP
+			if (resultado == ButtonType.OK) {
+				new PessoaDAO().excluirPessoa(pessoa);
+				pessoaTabela.getItems().remove(pessoaSelecionada);
+			}
 		} else {
-			// Caso não tenha seleção apresenta um alerta
-			Alert alerta = new Alert(AlertType.WARNING);
-			alerta.setTitle("Nenhuma seleção");
-			alerta.setHeaderText("Nenhuma pessoa foi selecionada");
-			alerta.setContentText("Por favor selecione uma pessoa na lista.");
-			
-			alerta.showAndWait();
+			AlertaUtil.alertaWarningSelecao();
 		}
 	}
-	
+
 	/**
 	 * Chamado quando o usuário clica no botão novo. Abre uma janela para editar
 	 * detalhes da nova pessoa.
@@ -177,12 +179,12 @@ public class PessoaOverviewViewController {
 	private void novaPessoa() {
 		Pessoa tempPessoa = new Pessoa();
 		boolean okClicked = mainApp.mostraPessoaEditar(tempPessoa);
-		
-		if(okClicked) {
+
+		if (okClicked) {
 			mainApp.getPessoaData().add(tempPessoa);
 		}
 	}
-	
+
 	/**
 	 * Chamado quando o usuário clica no botão editar. Abre a janela para editar
 	 * detalhes da pessoa selecionada.
@@ -191,21 +193,16 @@ public class PessoaOverviewViewController {
 	 */
 	@FXML
 	private void editarPessoa() {
-	    Pessoa pessoaSelecionada = pessoaTabela.getSelectionModel().getSelectedItem();
-	    if (pessoaSelecionada != null) {
-	        boolean okClicked = mainApp.mostraPessoaEditar(pessoaSelecionada);
-	        if (okClicked) {
-	            mostrarDetalhesPessoa(pessoaSelecionada);
-	        }
+		Pessoa pessoaSelecionada = pessoaTabela.getSelectionModel().getSelectedItem();
+		if (pessoaSelecionada != null) {
+			boolean okClicked = mainApp.mostraPessoaEditar(pessoaSelecionada);
+			if (okClicked) {
+				mostrarDetalhesPessoa(pessoaSelecionada);
+			}
 
-	    } else {
-	    	// Caso não tenha seleção apresenta um alerta
-	    	Alert alerta = new Alert(AlertType.WARNING);
-	    	alerta.setTitle("Nenhuma seleção");
-	    	alerta.setHeaderText("Nenhuma pessoa foi selecionada");
-	    	alerta.setContentText("Por favor selecione uma pessoa na lista.");
-	    	
-	    	alerta.showAndWait();
-	    }
+		} else {
+			// Caso não tenha seleção apresenta um alerta
+			AlertaUtil.alertaWarningSelecao();
+		}
 	}
 }

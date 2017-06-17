@@ -1,7 +1,6 @@
 package br.com.javafx.agenda;
 
 import java.io.IOException;
-
 import br.com.javafx.agenda.controller.PessoaEditViewController;
 import br.com.javafx.agenda.controller.PessoaOverviewViewController;
 import br.com.javafx.agenda.dao.PessoaDAO;
@@ -16,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.converter.PercentageStringConverter;
 
 /**
  *  
