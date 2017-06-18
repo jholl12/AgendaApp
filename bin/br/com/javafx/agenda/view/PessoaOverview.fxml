@@ -17,7 +17,7 @@
         <items>
           <AnchorPane prefHeight="293.0" prefWidth="204.0">
                <children>
-                  <TableView fx:id="pessoaTabela" layoutX="-6.0" prefHeight="434.0" prefWidth="284.0" styleClass="label-bright" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableView" layoutX="-6.0" prefHeight="434.0" prefWidth="284.0" styleClass="label-bright" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="nomeColuna" prefWidth="118.0" text="Nome" />
                       <TableColumn fx:id="sobrenomeColuna" prefWidth="173.0" text="Sobrenome" />
@@ -50,26 +50,29 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="nome" styleClass="label-bright" text="Label" GridPane.columnIndex="2" />
-                        <Label fx:id="sobrenome" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Label fx:id="dataAniversario" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <Label fx:id="rua" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <Label fx:id="cidade" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                        <Label fx:id="cep" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                         <Label text="Primeiro Nome:" GridPane.columnIndex="1" />
                         <Label text="Sobrenome:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Data de Aniversário:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Email:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="CPF:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        
                         <Label text="Rua:" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label text="Cidade:" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <Label text="CEP:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Label text="Bairro:" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label fx:id="bairro" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                         <Label text="Número:" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Label fx:id="numero" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                        <Label text="Email:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="CPF:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="email" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <Label fx:id="cpf" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  
+                        <Label fx:id="nomeLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" />
+                        <Label fx:id="sobrenomeLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="dataAniversarioLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Label fx:id="emailLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Label fx:id="cpfLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                       
+                        <Label fx:id="ruaLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <Label fx:id="bairroLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="6" />                      
+                        <Label fx:id="cidadeLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="7" />                    
+                        <Label fx:id="cepLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                        <Label fx:id="numeroLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                      </children>
                   </GridPane>
                   <HBox layoutX="81.0" layoutY="254.0" AnchorPane.rightAnchor="46.0" />
