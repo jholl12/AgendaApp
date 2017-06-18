@@ -31,7 +31,7 @@ public class AlertaUtil {
 
 	/**
 	 * Método responsável por apresentar o Pop UP de Confirmation quando for
-	 * solictada a ação de exclusão de uma pessoa
+	 * solicitada a ação de exclusão de uma pessoa
 	 * 
 	 * @return o tipo do botão clicado "OK" ou "CANCEL"
 	 * @author Jhonata Santos
@@ -48,6 +48,27 @@ public class AlertaUtil {
 			return ButtonType.OK;
 		} else {
 			return ButtonType.CANCEL;
+		}
+	}
+
+	/**
+	 * Método responsável por apresentar o Pop UP de Error quando houver algum
+	 * erro ao validar os inputs
+	 * 
+	 * @param errorMessage
+	 * @return
+	 */
+	public static boolean alertaErrorCampoInvalido(String errorMessage) {
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			Alert alerta = new Alert(AlertType.ERROR);
+			alerta.setTitle("Campos Inválidos");
+			alerta.setHeaderText("Por favor, corrija os campos inválidos");
+			alerta.setContentText(errorMessage);
+			alerta.showAndWait();
+
+			return false;
 		}
 	}
 }

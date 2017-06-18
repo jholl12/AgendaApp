@@ -21,42 +21,29 @@ import javafx.util.Callback;
  * @author Jhonata Santos
  * @version 1.0
  */
-public class PessoaOverviewViewController {
+public class PessoaOverviewController {
 
-	@FXML
-	private TableView<Pessoa> pessoaTabela;
-	@FXML
-	private TableColumn<Pessoa, String> nomeColuna;
-	@FXML
-	private TableColumn<Pessoa, String> sobrenomeColuna;
+	@FXML private TableView<Pessoa> tableView;
+	@FXML private TableColumn<Pessoa, String> nomeColuna;
+	@FXML private TableColumn<Pessoa, String> sobrenomeColuna;
 
-	@FXML
-	private Label nome;
-	@FXML
-	private Label sobrenome;
-	@FXML
-	private Label dataAniversario;
-	@FXML
-	private Label email;
-	@FXML
-	private Label cpf;
-	@FXML
-	private Label rua;
-	@FXML
-	private Label bairro;
-	@FXML
-	private Label cidade;
-	@FXML
-	private Label cep;
-	@FXML
-	private Label numero;
+	@FXML private Label nomeLabel;
+	@FXML private Label sobrenomeLabel;
+	@FXML private Label dataAniversarioLabel;
+	@FXML private Label emailLabel;
+	@FXML private Label cpfLabel;
+	@FXML private Label ruaLabel;
+	@FXML private Label bairroLabel;
+	@FXML private Label cidadeLabel;
+	@FXML private Label cepLabel;
+	@FXML private Label numeroLabel;
 
 	// Referência para a aplicação main
 	private MainApp mainApp;
 
 	/**
-	 * Inicializa a classe controller. Este método é chamado automaticamente
-	 * após o arquivo fxml ter sido carregado.
+	 * Este método é chamado automaticamente após o arquivo fxml ter sido
+	 * carregado.
 	 * 
 	 * @author Jhonata Santos
 	 */
@@ -83,7 +70,7 @@ public class PessoaOverviewViewController {
 		mostrarDetalhesPessoa(null);
 
 		// Detecta mudança de seleção e mostra os detalhes da pessoa quando houver mudança
-		pessoaTabela.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Pessoa>() {
+		tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Pessoa>() {
 			@Override
 			public void changed(ObservableValue<? extends Pessoa> observable, Pessoa oldValue, Pessoa newValue) {
 				mostrarDetalhesPessoa(newValue);
@@ -102,7 +89,7 @@ public class PessoaOverviewViewController {
 		this.mainApp = mainApp;
 
 		// Adiciona os dados da observable list na tabela
-		pessoaTabela.setItems(mainApp.getPessoaData());
+		tableView.setItems(mainApp.getPessoaData());
 	}
 
 	// AÇÕES
@@ -118,28 +105,28 @@ public class PessoaOverviewViewController {
 		// Verifica se o objeto recebido é nulo
 		if (pessoa != null) {
 			// Preenche as labels com as informações do objeto pessoa
-			nome.setText(pessoa.getNome());
-			sobrenome.setText(pessoa.getSobrenome());
-			dataAniversario.setText(DataUtil.formatToString(pessoa.getDataAniversario()));
-			email.setText(pessoa.getEmail());
-			cpf.setText(pessoa.getCpf());
-			rua.setText(pessoa.getEndereco().getRua());
-			bairro.setText(pessoa.getEndereco().getBairro());
-			cidade.setText(pessoa.getEndereco().getCidade());
-			cep.setText(Integer.toString(pessoa.getEndereco().getCep()));
-			numero.setText(Integer.toString(pessoa.getEndereco().getNumero())); 
+			nomeLabel.setText(pessoa.getNome());
+			sobrenomeLabel.setText(pessoa.getSobrenome());
+			dataAniversarioLabel.setText(DataUtil.formatToString(pessoa.getDataAniversario()));
+			emailLabel.setText(pessoa.getEmail());
+			cpfLabel.setText(pessoa.getCpf());
+			ruaLabel.setText(pessoa.getEndereco().getRua());
+			bairroLabel.setText(pessoa.getEndereco().getBairro());
+			cidadeLabel.setText(pessoa.getEndereco().getCidade());
+			cepLabel.setText(Integer.toString(pessoa.getEndereco().getCep()));
+			numeroLabel.setText(Integer.toString(pessoa.getEndereco().getNumero())); 
 		} else {
 			// Se a pessoa for null, remove todos os textos
-			nome.setText("");
-			sobrenome.setText("");
-			dataAniversario.setText("");
-			email.setText("");
-			cpf.setText("");
-			rua.setText("");
-			bairro.setText("");
-			cidade.setText("");
-			cep.setText("");
-			numero.setText("");
+			nomeLabel.setText("");
+			sobrenomeLabel.setText("");
+			dataAniversarioLabel.setText("");
+			emailLabel.setText("");
+			cpfLabel.setText("");
+			ruaLabel.setText("");
+			bairroLabel.setText("");
+			cidadeLabel.setText("");
+			cepLabel.setText("");
+			numeroLabel.setText("");
 		}
 	}
 
@@ -152,17 +139,17 @@ public class PessoaOverviewViewController {
 	@FXML
 	private void deletarPessoa() {
 		// Obtem o indice da pessoa selecionada
-		int pessoaSelecionada = pessoaTabela.getSelectionModel().getSelectedIndex();
+		int pessoaSelecionada = tableView.getSelectionModel().getSelectedIndex();
 
 		// Verifica a pessoa selecionada
 		if (pessoaSelecionada >= 0) {
-			Pessoa pessoa = pessoaTabela.getItems().get(pessoaSelecionada);
+			Pessoa pessoa = tableView.getItems().get(pessoaSelecionada);
 			ButtonType resultado = AlertaUtil.alertaConfirmationExclusao();
 
 			// Verifica o botão clicado no Pop UP
 			if (resultado == ButtonType.OK) {
 				new PessoaDAO().excluirPessoa(pessoa);
-				pessoaTabela.getItems().remove(pessoaSelecionada);
+				tableView.getItems().remove(pessoaSelecionada);
 			}
 		} else {
 			AlertaUtil.alertaWarningSelecao();
@@ -193,7 +180,7 @@ public class PessoaOverviewViewController {
 	 */
 	@FXML
 	private void editarPessoa() {
-		Pessoa pessoaSelecionada = pessoaTabela.getSelectionModel().getSelectedItem();
+		Pessoa pessoaSelecionada = tableView.getSelectionModel().getSelectedItem();
 		if (pessoaSelecionada != null) {
 			boolean okClicked = mainApp.mostraPessoaEditar(pessoaSelecionada);
 			if (okClicked) {
@@ -201,7 +188,6 @@ public class PessoaOverviewViewController {
 			}
 
 		} else {
-			// Caso não tenha seleção apresenta um alerta
 			AlertaUtil.alertaWarningSelecao();
 		}
 	}

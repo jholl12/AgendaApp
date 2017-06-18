@@ -79,8 +79,8 @@ public class PessoaDAO {
 	 */
 	public boolean excluirPessoa(Pessoa pessoa) {
 		Connection conn = new ConnectionFactory().getConnection();
-		String query = "DELETE pessoas.*, enderecos.* FROM agendaapp.pessoas "
-				+ "INNER JOIN agendaapp.enderecos ON agendaapp.pessoas.id_endereco = agendaapp.enderecos.id "
+		String query = "DELETE pessoas.*, enderecos.* FROM pessoas "
+				+ "INNER JOIN enderecos ON pessoas.id_endereco = enderecos.id "
 				+ "WHERE pessoas.cpf = " + "'" + pessoa.getCpf() + "'";
 		PreparedStatement ps;
 

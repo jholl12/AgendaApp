@@ -1,8 +1,8 @@
 package br.com.javafx.agenda;
 
 import java.io.IOException;
-import br.com.javafx.agenda.controller.PessoaEditViewController;
-import br.com.javafx.agenda.controller.PessoaOverviewViewController;
+import br.com.javafx.agenda.controller.PessoaEditController;
+import br.com.javafx.agenda.controller.PessoaOverviewController;
 import br.com.javafx.agenda.dao.PessoaDAO;
 import br.com.javafx.agenda.model.Pessoa;
 import javafx.application.Application;
@@ -92,7 +92,7 @@ public class MainApp extends Application {
 			rootLayout.setCenter(pessoaOverview);
 			
 			// Da ao controlador acesso ao main app
-			PessoaOverviewViewController controller = loader.getController();
+			PessoaOverviewController controller = loader.getController();
 			controller.setMainApp(this);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -126,7 +126,7 @@ public class MainApp extends Application {
 	        dialogStage.getIcons().add(new Image("file:resources/images/icone.png"));
 
 	        // Define a pessoa no controller.
-	        PessoaEditViewController controller = loader.getController();
+	        PessoaEditController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
 	        controller.setPessoa(pessoa);
 
