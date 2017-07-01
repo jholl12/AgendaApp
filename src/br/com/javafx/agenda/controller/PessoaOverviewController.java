@@ -8,12 +8,11 @@ import br.com.javafx.agenda.utils.DataUtil;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
-import javafx.util.Callback;
 
 /**
  * View para ver os detalhes gerais de pessoas.
@@ -37,6 +36,8 @@ public class PessoaOverviewController {
 	@FXML private Label cidadeLabel;
 	@FXML private Label cepLabel;
 	@FXML private Label numeroLabel;
+	
+	@FXML private Button deletarPessoa;
 
 	// Referência para a aplicação main
 	private MainApp mainApp;
@@ -50,25 +51,26 @@ public class PessoaOverviewController {
 	@FXML
 	private void initialize() {
 		// Inicializa a tabela de pessoa com duas colunas
-		nomeColuna.setCellValueFactory(
-				// Classe anônima
-				new Callback<CellDataFeatures<Pessoa, String>, ObservableValue<String>>() {
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<Pessoa, String> cellData) {
-						return cellData.getValue().nomeProperty();
-					}
-				});
-
-		sobrenomeColuna.setCellValueFactory(new Callback<CellDataFeatures<Pessoa, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Pessoa, String> cellData) {
-				return cellData.getValue().sobrenomeProperty();
-			}
-		});
+//		nomeColuna.setCellValueFactory(
+//				// Classe anônima
+//				new Callback<CellDataFeatures<Pessoa, String>, ObservableValue<String>>() {
+//					@Override
+//					public ObservableValue<String> call(CellDataFeatures<Pessoa, String> cellData) {
+//						return cellData.getValue().nomeProperty();
+//					}
+//				});
+//
+//		sobrenomeColuna.setCellValueFactory(new Callback<CellDataFeatures<Pessoa, String>, ObservableValue<String>>() {
+//			@Override
+//			public ObservableValue<String> call(CellDataFeatures<Pessoa, String> cellData) {
+//				return cellData.getValue().sobrenomeProperty();
+//			}
+//		});
+//		deletarPessoa.disableProperty().bind(tableView.getSelectionModel().selectedItemProperty().isNull());
 
 		// Limpa os detalhes da pessoa
 		mostrarDetalhesPessoa(null);
-
+		
 		// Detecta mudança de seleção e mostra os detalhes da pessoa quando houver mudança
 		tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Pessoa>() {
 			@Override
@@ -116,7 +118,7 @@ public class PessoaOverviewController {
 			cepLabel.setText(Integer.toString(pessoa.getEndereco().getCep()));
 			numeroLabel.setText(Integer.toString(pessoa.getEndereco().getNumero())); 
 		} else {
-			// Se a pessoa for null, remove todos os textos
+			// Se a pessoa for null, limpa todos os labels
 			nomeLabel.setText("");
 			sobrenomeLabel.setText("");
 			dataAniversarioLabel.setText("");
@@ -186,7 +188,6 @@ public class PessoaOverviewController {
 			if (okClicked) {
 				mostrarDetalhesPessoa(pessoaSelecionada);
 			}
-
 		} else {
 			AlertaUtil.alertaWarningSelecao();
 		}

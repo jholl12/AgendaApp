@@ -1,10 +1,7 @@
 package br.com.javafx.agenda.model;
 
 import java.time.LocalDate;
-
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -17,24 +14,24 @@ import javafx.beans.property.StringProperty;
  */
 public class Pessoa {
 
-	private StringProperty nome;
-	private StringProperty sobrenome;
-	private ObjectProperty<LocalDate> dataAniversário;
-	private StringProperty email;
-	private StringProperty cpf;
+	private StringProperty nome = new SimpleStringProperty();
+	private StringProperty sobrenome = new SimpleStringProperty();
+	private ObjectProperty<LocalDate> dataAniversário = new SimpleObjectProperty<LocalDate>();
+	private StringProperty email = new SimpleStringProperty();
+	private StringProperty cpf = new SimpleStringProperty();
 	private Endereco endereco;
 		
 	/**
-	 * Inicializa o onbjeto com as informações vazias
+	 * Inicializa o objeto com as informações vazias
 	 * 
 	 * @author Jhonata Santos
 	 */
 	public Pessoa() {
-		this(null, null, null, null, null, null, null, "", 0, 0);
+		this.endereco = new Endereco();
 	}
 	
 	/**
-	 * Inicializa o objeto com as informações já completas
+	 * Inicializa o objeto com as informações já completas de pessoa e endereço
 	 * 
 	 * @param nome
 	 * @param sobrenome
@@ -46,12 +43,11 @@ public class Pessoa {
 	 * @author Jhonata Santos
 	 */
 	public Pessoa(String nome, String sobrenome, String data, String email, String cpf, String rua, String bairro, String cidade, int cep, int numero) {
-		this.nome = new SimpleStringProperty(nome);
-		this.sobrenome = new SimpleStringProperty(sobrenome);
-		this.email = new SimpleStringProperty(email);
-		this.cpf = new SimpleStringProperty(cpf);
-		this.dataAniversário = new SimpleObjectProperty<LocalDate>(LocalDate.parse(data));
-       
+		this.nome.set(nome);
+		this.sobrenome.set(sobrenome);
+		this.email.set(email);
+		this.cpf.set(cpf);
+		this.dataAniversário.set(LocalDate.parse(data));
 		this.endereco = new Endereco(rua, bairro, cidade, cep, numero);
 	}
 	

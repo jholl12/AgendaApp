@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <AnchorPane prefHeight="440.0" prefWidth="690.0" stylesheets="@css/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.javafx.agenda.controller.PessoaOverviewController">
    <children>
@@ -19,8 +20,16 @@
                <children>
                   <TableView fx:id="tableView" layoutX="-6.0" prefHeight="434.0" prefWidth="284.0" styleClass="label-bright" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="nomeColuna" prefWidth="118.0" text="Nome" />
-                      <TableColumn fx:id="sobrenomeColuna" prefWidth="173.0" text="Sobrenome" />
+                      <TableColumn fx:id="nomeColuna" prefWidth="118.0" text="Nome" >
+                      	<cellValueFactory>
+                      		<PropertyValueFactory property="nome" />
+                      	</cellValueFactory>
+                      </TableColumn>
+                      <TableColumn fx:id="sobrenomeColuna" prefWidth="173.0" text="Sobrenome">
+                      <cellValueFactory>
+                      		<PropertyValueFactory property="sobrenome" />
+                      	</cellValueFactory>
+                      </TableColumn>
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

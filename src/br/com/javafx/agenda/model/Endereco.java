@@ -13,23 +13,23 @@ import javafx.beans.property.StringProperty;
  */
 public class Endereco {
 
-	private StringProperty rua;
-	private StringProperty bairro;
-	private StringProperty cidade;
-	private IntegerProperty cep;
-	private IntegerProperty numero;
+	private StringProperty rua = new SimpleStringProperty();
+	private StringProperty bairro = new SimpleStringProperty();
+	private StringProperty cidade = new SimpleStringProperty();
+	private IntegerProperty cep = new SimpleIntegerProperty();
+	private IntegerProperty numero = new SimpleIntegerProperty();
 		
 	/**
-	 * Inicializa o onbjeto com as informações vazias
+	 * Inicializa o objeto com as informações vazias
 	 * 
 	 * @author Jhonata Santos
 	 */
 	public Endereco() {
-		this(null, null, null,0, 0);
+
 	}
 	
 	/**
-	 * Inicializa o objeto com as informações já completas
+	 * Inicializa o objeto com as informações já completas de endereço
 	 * 
 	 * @param rua
 	 * @param bairro
@@ -39,11 +39,11 @@ public class Endereco {
 	 * @author Jhonata Santos
 	 */
 	public Endereco(String rua, String bairro, String cidade, int cep, int numero) {
-		this.rua = new SimpleStringProperty(rua);
-		this.bairro = new SimpleStringProperty(bairro);
-		this.cidade = new SimpleStringProperty(cidade);
-		this.cep = new SimpleIntegerProperty(cep);
-		this.numero = new SimpleIntegerProperty(numero);
+		this.rua.set(rua);
+		this.bairro.set(bairro);
+		this.cidade.set(cidade);
+		this.cep.set(cep);
+		this.numero.set(numero);
 	}
 	
 	/***************************************************************************

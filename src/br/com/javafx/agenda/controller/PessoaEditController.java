@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import br.com.javafx.agenda.model.Pessoa;
-import br.com.javafx.agenda.model.Endereco;
+import br.com.javafx.agenda.dao.PessoaDAO;
 import br.com.javafx.agenda.utils.AlertaUtil;
 import br.com.javafx.agenda.utils.DataUtil;
 
@@ -30,6 +30,7 @@ public class PessoaEditController {
 
 	private Stage dialogStage;
 	private Pessoa pessoa;
+	private PessoaDAO dao;
 	private boolean okClicked = false;
 
 	/**
@@ -40,7 +41,7 @@ public class PessoaEditController {
 	 */
 	@FXML
 	private void initialize() {
-
+		 dao = new PessoaDAO();
 	}
 
 	/**
@@ -56,7 +57,7 @@ public class PessoaEditController {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 
-		if (pessoa.nomeProperty().get() != null) {
+		if (pessoa.getNome() != null) {
 			nomeInput.setText(pessoa.getNome());
 			sobrenomeInput.setText(pessoa.getSobrenome());
 			dataAniversarioInput.setText(DataUtil.formatToString(pessoa.getDataAniversario())); 
@@ -100,20 +101,25 @@ public class PessoaEditController {
 	 */
 	@FXML
 	private void clickOk() {
-		if (isInputValid()) {
-			pessoa.setNome(nomeInput.getText());
-			pessoa.setSobreNome(sobrenomeInput.getText());
-			pessoa.setDataAniversário(DataUtil.formatToLocalDate(dataAniversarioInput.getText()));
-			pessoa.setEmail(emailInput.getText());
-			pessoa.setCpf(cpfInput.getText());
+		if (validarInputs()) {
+			this.pessoa.setNome(nomeInput.getText());
+			this.pessoa.setSobreNome(sobrenomeInput.getText());
+			this.pessoa.setDataAniversário(DataUtil.formatToLocalDate(dataAniversarioInput.getText()));
+			this.pessoa.setEmail(emailInput.getText());
+			this.pessoa.setCpf(cpfInput.getText());
 
-			Endereco endereco = pessoa.getEndereco();
-			endereco.setRua(ruaInput.getText());
-			endereco.setBairro(bairroInput.getText());
-			endereco.setCidade(cidadeInput.getText());
-			endereco.setCep(Integer.parseInt(cepInput.getText()));
-			endereco.setNumero(Integer.parseInt(numeroInput.getText()));
-
+			this.pessoa.getEndereco().setRua(ruaInput.getText());
+			this.pessoa.getEndereco().setBairro(bairroInput.getText());
+			this.pessoa.getEndereco().setCidade(cidadeInput.getText());
+			this.pessoa.getEndereco().setCep(Integer.parseInt(cepInput.getText()));
+			this.pessoa.getEndereco().setNumero(Integer.parseInt(numeroInput.getText()));
+			
+			if(dao.consultarCpf(this.pessoa.getCpf())) {
+				dao.adicionarPessoa(pessoa);
+			} else {
+				dao.editarPessoa(pessoa);
+			}
+			
 			okClicked = true;
 			dialogStage.close();
 		}
@@ -136,7 +142,7 @@ public class PessoaEditController {
 	 * @return true se a entrada é válida
 	 * @author Jhonata Santos
 	 */
-	private boolean isInputValid() {
+	private boolean validarInputs() {
 		String errorMessage = "";
 
 		if (nomeInput.getText() == null || nomeInput.getText().length() == 0) {
