@@ -49,7 +49,7 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("Aplicativo de Endereços");
 
 		// Aplica o icone na aplicação.
-	    this.primaryStage.getIcons().add(new Image("file:resources/images/icone.png"));
+	    this.primaryStage.getIcons().add(new Image("file:resources/images/main_icon.png"));
 		
 		inicializaRootLayout();
 		mostraPessoaOverview();
@@ -123,7 +123,7 @@ public class MainApp extends Application {
 	        dialogStage.setScene(scene);
 	        
 			// Aplica o icone na aplicação.
-	        dialogStage.getIcons().add(new Image("file:resources/images/icone.png"));
+	        dialogStage.getIcons().add(new Image("file:resources/images/edit_icon.png"));
 
 	        // Define a pessoa no controller.
 	        PessoaEditController controller = loader.getController();
