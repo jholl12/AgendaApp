@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import br.com.javafx.agenda.model.Pessoa;
+
+import java.awt.Color;
+
 import br.com.javafx.agenda.dao.PessoaDAO;
 import br.com.javafx.agenda.utils.AlertaUtil;
 import br.com.javafx.agenda.utils.DataUtil;
@@ -63,7 +66,8 @@ public class PessoaEditController {
 			dataAniversarioInput.setText(DataUtil.formatToString(pessoa.getDataAniversario())); 
 			emailInput.setText(pessoa.getEmail());
 			cpfInput.setText(pessoa.getCpf());
-
+			cpfInput.setEditable(false); // Deixa o textfield read only
+			
 			ruaInput.setText(pessoa.getEndereco().getRua());
 			bairroInput.setText(pessoa.getEndereco().getBairro());
 			cidadeInput.setText(pessoa.getEndereco().getCidade());
