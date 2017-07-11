@@ -90,7 +90,7 @@
                   <TextField fx:id="sobrenomeInput" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="dataAniversarioInput" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="emailInput" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="cpfInput" editable="false" style="-fx-background-color: #1d1d1d; -fx-border-color: #ffffff; -fx-border-radius: 3; -fx-text-fill: #ffffff; -fx-opacity: 0.6;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="cpfInput" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="CPF:" GridPane.rowIndex="4">
                      <font>
                         <Font name="Century Gothic" size="12.0" />

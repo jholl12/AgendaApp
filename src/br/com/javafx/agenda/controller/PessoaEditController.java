@@ -66,7 +66,9 @@ public class PessoaEditController {
 			dataAniversarioInput.setText(DataUtil.formatToString(pessoa.getDataAniversario())); 
 			emailInput.setText(pessoa.getEmail());
 			cpfInput.setText(pessoa.getCpf());
+			
 			cpfInput.setEditable(false); // Deixa o textfield read only
+			cpfInput.setStyle("-fx-background-color: #1d1d1d; -fx-border-color: #ffffff; -fx-border-radius: 3; -fx-text-fill: #ffffff; -fx-opacity: 0.6;");			
 			
 			ruaInput.setText(pessoa.getEndereco().getRua());
 			bairroInput.setText(pessoa.getEndereco().getBairro());
